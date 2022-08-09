@@ -25,6 +25,7 @@ class Clean_Tweets:
         """
         drop duplicate rows
         """
+        df.drop_duplicates()
 
         return df
 
@@ -41,7 +42,8 @@ class Clean_Tweets:
         convert columns like polarity, subjectivity, retweet_count
         favorite_count etc to numbers
         """
-        df['polarity'] = pd
+        df.columns = ['1', '2', '3', '4', '5', '6', '7',
+                      '8', '9', '10', '11', '12', '13', '14', '15']
 
         return df
 
@@ -50,6 +52,6 @@ class Clean_Tweets:
         remove non english tweets from lang
         """
 
-        df = pd
+        df.lang.str.replace('[^a-zA-Z0-9]', '')
 
         return df

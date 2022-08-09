@@ -1,3 +1,4 @@
+from genericpath import getctime
 import json
 import pandas as pd
 from textblob import TextBlob
@@ -31,25 +32,44 @@ class TweetDfExtractor:
     dataframe
     """
 
+    tweets_list = ""
+
     def __init__(self, tweets_list):
 
         self.tweets_list = tweets_list
 
     # an example function
     def find_statuses_count(self) -> list:
-        
+
+        file = read_json(self.tweets_list)
+        statuses_count = file.count(0, 5)
         return statuses_count
 
     def find_full_text(self) -> list:
-        text = self.text
+
+        file = read_json(self.tweets_list)
+        text = [x for x in file[0:5]]
 
         return text
 
     def find_sentiments(self, text) -> list:
 
+        polarity = []
+        subjectivity = []
+        for t in text:
+            sentiment = TextBlob(t).sentiment
+            polarity.append(sentiment.polarity)
+            subjectivity.append(sentiment.subjectivity)
+            self.subjectivity = subjectivity
+
         return polarity, self.subjectivity
 
     def find_created_time(self) -> list:
+
+        file = read_json(self.tweets_list)
+
+        time = getctime(file)
+        created_at = time.ctime(time)
 
         return created_at
 
@@ -59,7 +79,11 @@ class TweetDfExtractor:
         return source
 
     def find_screen_name(self) -> list:
-        screen_name = self.screen_name
+
+        file = read_json(self.tweets_list)
+
+        for file in range(0, 5):
+            screen_name = file
 
         return screen_name
 
