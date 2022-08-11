@@ -66,10 +66,8 @@ class TweetDfExtractor:
 
     def find_created_time(self) -> list:
 
-        file = read_json(self.tweets_list)
+        created_at = [x['created_at'] for x in self.tweets_list]
 
-        time = getctime(file)
-        created_at = time.ctime(time)
 
         return created_at
 
