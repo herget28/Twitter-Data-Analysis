@@ -1,4 +1,3 @@
-from genericpath import getctime
 import json
 import pandas as pd
 from textblob import TextBlob
@@ -47,8 +46,7 @@ class TweetDfExtractor:
 
     def find_full_text(self) -> list:
 
-        file = read_json(self.tweets_list)
-        text = [x for x in file[0:5]]
+        text = [x['orignial_text'] for x in self.tweets_list]
 
         return text
 
@@ -66,15 +64,13 @@ class TweetDfExtractor:
 
     def find_created_time(self) -> list:
 
-        file = read_json(self.tweets_list)
+        created_at = [x['created_at'] for x in self.tweets_list]
 
-        time = getctime(file)
-        created_at = time.ctime(time)
 
         return created_at
 
     def find_source(self) -> list:
-        source = self.source
+        source = [x['source'] for x in self.tweets_list]
 
         return source
 
@@ -88,12 +84,12 @@ class TweetDfExtractor:
         return screen_name
 
     def find_followers_count(self) -> list:
-        followers_count = self.follower_count
+        followers_count = [x['followers_count'] for x in self.tweets_list]
 
         return followers_count
 
     def find_friends_count(self) -> list:
-        friends_count = self.friends_count
+        friends_count = [x['friends_count'] for x in self.tweets_list]
 
         return friends_count
 
@@ -106,22 +102,22 @@ class TweetDfExtractor:
         return is_sensitive
 
     def find_favourite_count(self) -> list:
-        favourite_count = self.favourite_count
+        favourite_count = [x['favourite_count'] for x in self.tweets_list]
 
         return favourite_count
 
     def find_retweet_count(self) -> list:
-        retweet_count = self.retweet_count
+        retweet_count = [x['retweet_count'] for x in self.tweets_list]
 
         return retweet_count
 
     def find_hashtags(self) -> list:
-        hashtags = self.hashtags
+        hashtags = [x['hashtags'] for x in self.tweets_list]
 
         return hashtags
 
     def find_mentions(self) -> list:
-        mentions = self.mentions
+        mentions = [x['user_mentions'] for x in self.tweets_list]
 
         return mentions
 
